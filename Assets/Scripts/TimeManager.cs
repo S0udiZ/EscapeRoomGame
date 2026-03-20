@@ -7,6 +7,8 @@ public class TimeManager : MonoBehaviour
     //Delegates
     public delegate void Test();
     static public Test test;
+    [SerializeField] int maxFrames;
+    static public int MaxFrames;
 
     [SerializeField] bool DebugButton;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,7 +27,7 @@ public class TimeManager : MonoBehaviour
 
     void Start()
     {
-
+        MaxFrames = maxFrames;
     }
 
     // Update is called once per frame
@@ -36,5 +38,10 @@ public class TimeManager : MonoBehaviour
             DebugButton = false;
             test();
         }
+    }
+
+    void FixedUpdate()
+    {
+
     }
 }

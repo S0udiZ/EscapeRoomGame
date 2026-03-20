@@ -398,6 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a44c0746bbec543aa39a12cba0013b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
+  maxFrames: 600
   DebugButton: 0
 --- !u!4 &386855519
 Transform:

@@ -41,6 +41,12 @@ public class TimeTrakedObject : MonoBehaviour
         else
         {
             //print("Updating Object");
+            if (trackedPostion.Count > TimeManager.MaxFrames)
+            {
+                trackedPostion.RemoveAt(0);
+                trackedRotation.RemoveAt(0);
+                trackedVelocity.RemoveAt(0);
+            }
             trackedPostion.Add(transform.position);
             trackedRotation.Add(transform.rotation);
             trackedVelocity.Add(rb.linearVelocity);
@@ -50,6 +56,6 @@ public class TimeTrakedObject : MonoBehaviour
 
     void TestObj()
     {
-        print(gameObject.name);
+
     }
 }
