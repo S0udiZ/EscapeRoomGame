@@ -11,7 +11,6 @@ public class TimeManager : MonoBehaviour
 
     //Delegates
     public delegate void RewindFunc();
-    public delegate void SetBool(bool Value);
     static public RewindFunc RewindStart;
     static public RewindFunc RewindStop;
     [SerializeField] int maxFrames;

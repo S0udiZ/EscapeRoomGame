@@ -35,7 +35,6 @@ public class TimeTrakedObject : MonoBehaviour
     {
         TimeManager.RewindStart += StartRewind;
         TimeManager.RewindStop += StopRewind;
-        //TimeManager.SetInterpolation += SetRigidBodyInterpolation;
     }
 
     // Update is called once per frame
