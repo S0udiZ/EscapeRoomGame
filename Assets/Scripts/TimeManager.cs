@@ -53,13 +53,17 @@ public class TimeManager : MonoBehaviour
             DebugButtonRStop = false;
             RewindStop();
         }
-        //Debug.Log($"{Time.timeScale}");
     }
 
     void FixedUpdate()
     {
 
     }
+
+    /// <summary>
+    /// StartRewind is a corutine that lerps between 2 time scales to create a 
+    /// smooth transtion into reverse time
+    /// </summary>
     IEnumerator StartRewind()
     {
         float currentSlowTime = 0;
