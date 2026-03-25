@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UIElements;
 
 public class TimeTrakedObject : MonoBehaviour
 {
+
     List<Vector3> trackedPostion;
     List<Quaternion> trackedRotation;
     List<Vector3> trackedVelocity;
@@ -14,6 +16,7 @@ public class TimeTrakedObject : MonoBehaviour
     [SerializeField] bool rewind;
     Vector3 rewindVelocity;
     Vector3 rewindAngularVelocity;
+
     bool updateRewindVelocity;
 
 
@@ -32,6 +35,7 @@ public class TimeTrakedObject : MonoBehaviour
     {
         TimeManager.RewindStart += StartRewind;
         TimeManager.RewindStop += StopRewind;
+        //TimeManager.SetInterpolation += SetRigidBodyInterpolation;
     }
 
     // Update is called once per frame
@@ -39,13 +43,11 @@ public class TimeTrakedObject : MonoBehaviour
     {
         if (rewind)
         {
-            rb.isKinematic = true;
-
             TimeRewind();
         }
         else
         {
-            rb.isKinematic = false;
+
             if (updateRewindVelocity)
             {
                 rb.linearVelocity = rewindVelocity;
@@ -85,7 +87,6 @@ public class TimeTrakedObject : MonoBehaviour
         //Guard Clause
         if (currentCount < 1)
         {
-            Debug.Log("Ran out of Rewind Space");
             return;
         }
 
@@ -132,12 +133,16 @@ public class TimeTrakedObject : MonoBehaviour
     void StartRewind()
     {
         rewind = true;
+        rb.isKinematic = true;
     }
 
     void StopRewind()
     {
         rewind = false;
+        rb.isKinematic = false;
+
     }
+
 
     void DebugCount()
     {
