@@ -3,34 +3,28 @@ using UnityEngine;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
-public class TimeTrakedObject : MonoBehaviour
+public abstract class TimeTrakedObject : MonoBehaviour
 {
 
-    List<Vector3> trackedPostion;
-    List<Quaternion> trackedRotation;
-    List<Vector3> trackedVelocity;
-    List<Vector3> trackedAngularVelocity;
+
     List<int> count;
     int listIndex = -1;
     int currentCount = 0;
-    [SerializeField] bool rewind;
-    Vector3 rewindVelocity;
-    Vector3 rewindAngularVelocity;
+    [SerializeField] protected bool rewind;
+    public bool TimeExempt;
 
-    bool updateRewindVelocity;
-
-
-    Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        trackedPostion = new();
-        trackedRotation = new();
-        trackedVelocity = new();
-        trackedAngularVelocity = new();
+
+        Init();
         count = new();
     }
+
+    /// <summary>
+    /// Initialize Lists
+    /// </summary>
+    public abstract void Init();
     void Awake()
     {
         TimeManager.RewindStart += StartRewind;
@@ -40,19 +34,15 @@ public class TimeTrakedObject : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (rewind)
+        ExtraBehaivourFixedUpdate();
+
+        if (rewind && !TimeExempt)
         {
             TimeRewind();
         }
         else
         {
 
-            if (updateRewindVelocity)
-            {
-                rb.linearVelocity = rewindVelocity;
-                rb.angularVelocity = rewindAngularVelocity;
-                updateRewindVelocity = false;
-            }
             TimeLog();
         }
 
@@ -60,9 +50,21 @@ public class TimeTrakedObject : MonoBehaviour
         //DebugCount();
     }
 
+    /// <summary>
+    /// Runs at the start of Fixed update to allow for special behavoiur
+    /// </summary>
+    virtual public void ExtraBehaivourFixedUpdate() { }
+
+    /// <summary>
+    /// boolean expresion to check if none of the tracked variabels has changed.
+    /// if it is the same it should return true if not return false
+    /// </summary>
+    /// <param name="index">the index of the lists that the values should be comapred to</param>
+    /// <returns>bool</returns>
+    public abstract bool IsSameAsLastFrame(int index);
     void TimeLog()
     {
-        if (listIndex != -1 && trackedPostion[listIndex] == transform.position && trackedRotation[listIndex] == transform.rotation && trackedVelocity[listIndex] == rb.linearVelocity)
+        if (listIndex != -1 && IsSameAsLastFrame(listIndex))
         {
             //print("Same Object Skiping");
             count[listIndex]++;
@@ -89,25 +91,37 @@ public class TimeTrakedObject : MonoBehaviour
             return;
         }
 
-        transform.position = trackedPostion[listIndex];
-        transform.rotation = trackedRotation[listIndex];
-        rewindVelocity = trackedVelocity[listIndex];
-        rewindAngularVelocity = trackedAngularVelocity[listIndex];
-        updateRewindVelocity = true;
+
+        ExtraBehaivourTimeRewind();
+
+        UpdateGameObject(listIndex);
+
         RemoveIndexOnLists(listIndex);
-
-
     }
 
-    void AddToTrackedList()
+    /// <summary>
+    /// Runs at the start of TimeRewind to allow for special behavoiur
+    /// </summary>
+    public virtual void ExtraBehaivourTimeRewind() { }
+
+
+    /// <summary>
+    /// Here you read from the lists at index and put it back into the GameObject
+    /// </summary>
+    public abstract void UpdateGameObject(int index);
+
+    public void AddToTrackedList()
     {
-        trackedPostion.Add(transform.position);
-        trackedRotation.Add(transform.rotation);
-        trackedVelocity.Add(rb.linearVelocity);
-        trackedAngularVelocity.Add(rb.angularVelocity);
+        AddToLists();
         count.Add(1);
         listIndex++;
     }
+
+    /// <summary>
+    /// Add all varibles to the tracked lists here
+    /// </summary>
+    public abstract void AddToLists();
+
     void RemoveIndexOnLists(int index)
     {
         if (count[index] > 1)
@@ -116,30 +130,29 @@ public class TimeTrakedObject : MonoBehaviour
         }
         else
         {
-            trackedPostion.RemoveAt(index);
-            trackedRotation.RemoveAt(index);
-            trackedVelocity.RemoveAt(index);
-            trackedAngularVelocity.RemoveAt(index);
+            RemoveOnList(index);
             count.RemoveAt(index);
             listIndex--;
 
         }
         currentCount--;
-
-
     }
 
-    void StartRewind()
+    /// <summary>
+    /// Remove item from tracked lists at index
+    /// </summary>
+    /// <param name="index"></param>
+    public abstract void RemoveOnList(int index);
+
+    public virtual void StartRewind()
     {
         rewind = true;
-        rb.isKinematic = true;
+
     }
 
-    void StopRewind()
+    public virtual void StopRewind()
     {
         rewind = false;
-        rb.isKinematic = false;
-
     }
 
 
