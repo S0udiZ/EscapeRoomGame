@@ -66,13 +66,10 @@ public abstract class TimeTrakedObject : MonoBehaviour
     {
         if (listIndex != -1 && IsSameAsLastFrame(listIndex))
         {
-            //print("Same Object Skiping");
             count[listIndex]++;
         }
         else
         {
-            //print("Updating Object");
-
             AddToTrackedList();
         }
         currentCount++;

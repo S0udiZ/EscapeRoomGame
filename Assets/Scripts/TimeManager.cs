@@ -13,8 +13,8 @@ public class TimeManager : MonoBehaviour
     public delegate void RewindFunc();
     static public RewindFunc RewindStart;
     static public RewindFunc RewindStop;
-    [SerializeField] int maxFrames;
-    [SerializeField] float slowTime;
+    [SerializeField] int maxFrames = 600;
+    [SerializeField] float slowTime = 1;
     static public int MaxFrames;
 
     [SerializeField] bool DebugButtonRStart;
@@ -71,7 +71,6 @@ public class TimeManager : MonoBehaviour
         {
             currentSlowTime += Time.deltaTime * (1 / Time.timeScale);
             Time.timeScale = Mathf.Lerp(1f, 0.1f, currentSlowTime / slowTime);
-            //Time.fixedDeltaTime = StartFixedDeltaTime * Time.timeScale;
             yield return null;
         }
         RewindStart();
@@ -80,10 +79,8 @@ public class TimeManager : MonoBehaviour
         {
             currentSlowTime += Time.deltaTime * (1 / Time.timeScale);
             Time.timeScale = Mathf.Lerp(0.1f, 1f, currentSlowTime / slowTime);
-            //Time.fixedDeltaTime = StartFixedDeltaTime * Time.timeScale;
             yield return null;
         }
         Time.timeScale = 1;
-        //Time.fixedDeltaTime = StartFixedDeltaTime * Time.timeScale;
     }
 }
