@@ -907,6 +907,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5619394750150901243, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
