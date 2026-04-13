@@ -14,11 +14,19 @@ public class TimeTrakedRigidBody : TimeTrakedObject
     Vector3 rewindVelocity;
     Vector3 rewindAngularVelocity;
     bool updateRewindVelocity;
+    Spring spring;
+
+    bool isSpring = false;
 
     Rigidbody rb;
 
     public override void Init()
     {
+        spring = GetComponent<Spring>();
+        if (spring != null)
+        {
+            isSpring = true;
+        }
         trackedPostion = new();
         trackedRotation = new();
         trackedVelocity = new();
@@ -56,11 +64,19 @@ public class TimeTrakedRigidBody : TimeTrakedObject
     {
         base.StartRewind();
         rb.isKinematic = true;
+        if (isSpring)
+        {
+            spring.enabled = false;
+        }
     }
     public override void StopRewind()
     {
         base.StopRewind();
         rb.isKinematic = false;
+        if (isSpring)
+        {
+            spring.enabled = true;
+        }
     }
 
     //Extra Behavoiour
