@@ -24,7 +24,6 @@ public class Spring : MonoBehaviour
 
         Vector3 targetForce = (targetPos - transform.position) * SpringForce;
 
-        print($"{targetForce} | {Time.time}");
         rb.AddForce(targetForce);
 
         Vector3 dampForce = rb.linearVelocity * -Dampaning;
