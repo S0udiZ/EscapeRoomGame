@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8863667214212606868, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 25f04334aada8ee49a265a9c7aaa3ea8, type: 2}
     - target: {fileID: -8679921383154817045, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -22,23 +26,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6532815
+      value: 0.92387956
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.6532815
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.27059805
+      value: 0.38268343
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.27059805
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -60,9 +64,21 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7d13dd91588c5da40ba4034d3ccb2e24, type: 2}
+    - target: {fileID: -2859109400176981367, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 25f04334aada8ee49a265a9c7aaa3ea8, type: 2}
     - target: {fileID: 919132149155446097, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
       propertyPath: m_Name
       value: RedButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970236244001280333, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2970236244001280333, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3451118302482216456, guid: 54a9a174c7e74914db7db5d81bd3d156, type: 3}
       propertyPath: m_Convex
