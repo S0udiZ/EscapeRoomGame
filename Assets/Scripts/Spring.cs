@@ -3,9 +3,11 @@ using UnityEngine;
 public class Spring : MonoBehaviour
 {
     [SerializeField] Transform ConnectedBody;
-    [SerializeField] float RestingDistance;
-    [SerializeField] float SpringForce;
-    [SerializeField] float Dampaning;
+    [SerializeField] float RestingDistance = 0.5f;
+    [SerializeField] bool AutoSetRestingDistance = false;
+    [SerializeField] float SpringForce = 55;
+    [SerializeField] float Dampaning = 10;
+
 
     Rigidbody rb;
     void Start()
@@ -14,6 +16,10 @@ public class Spring : MonoBehaviour
         if (rb == null)
         {
             Debug.LogError($"{gameObject} Does not have a rigidbody asigned");
+        }
+        if (AutoSetRestingDistance)
+        {
+            RestingDistance = (transform.position - ConnectedBody.position).magnitude;
         }
     }
 
