@@ -1,10 +1,14 @@
+using System.Collections.Generic;
+using System.Linq;
+using SaintsField;
 using UnityEngine;
 
 public class PresurePlate : MonoBehaviour
 {
     [SerializeField] GameObject TargetObject;
     [SerializeField] float ActivationTime;
-    [SerializeField] Interactable[] ActivationTargets;
+    // [SerializeField] Interactable[] ActivationTargets;
+    [SerializeField] private SaintsDictionary<Interactable[], PresurePlate[]> ActivationTargets;
     float curActivationTime;
     bool activated;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,20 +56,53 @@ public class PresurePlate : MonoBehaviour
 
     }
 
+    // void SendActivation()
+    // {
+    //     if (ActivationTargets.Length == 0) { return; }
+    //     foreach (Interactable ActivationTarget in ActivationTargets)
+    //     {
+    //         ActivationTarget.Activate();
+    //     }
+    // }
+    // void SendDeActivation()
+    // {
+    //     if (ActivationTargets.Length == 0) { return; }
+    //     foreach (Interactable ActivationTarget in ActivationTargets)
+    //     {
+    //         ActivationTarget.DeActivate();
+    //     }
+    // }
+
     void SendActivation()
     {
-        if (ActivationTargets.Length == 0) { return; }
-        foreach (Interactable ActivationTarget in ActivationTargets)
+        if (ActivationTargets.Count == 0) { return; }
+        foreach (KeyValuePair<Interactable[], PresurePlate[]> ActivationTarget in ActivationTargets)
         {
-            ActivationTarget.Activate();
+            if (ActivationTarget.Value.Length == 0)
+            {
+                foreach (var interactable in ActivationTarget.Key)
+                {
+                    interactable.Activate();
+                }
+            }
+            else if (ActivationTarget.Value.All(plate => plate.activated))
+            {
+                foreach (var interactable in ActivationTarget.Key)
+                {
+                    interactable.Activate();
+                }
+            }
         }
     }
     void SendDeActivation()
     {
-        if (ActivationTargets.Length == 0) { return; }
-        foreach (Interactable ActivationTarget in ActivationTargets)
+        if (ActivationTargets.Count == 0) { return; }
+        foreach (KeyValuePair<Interactable[], PresurePlate[]> ActivationTarget in ActivationTargets)
         {
-            ActivationTarget.DeActivate();
+            foreach (var interactable in ActivationTarget.Key)
+            {
+                interactable.DeActivate();
+            }
         }
     }
 }

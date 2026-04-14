@@ -3,6 +3,7 @@ using System.Collections;
 using Meta.Net.NativeWebSocket;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SocialPlatforms;
 
 public class TimeManager : MonoBehaviour
@@ -82,5 +83,21 @@ public class TimeManager : MonoBehaviour
             yield return null;
         }
         Time.timeScale = 1;
+    }
+
+    public void StartRewindAction(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            StartCoroutine(StartRewind());
+        }
+    }
+
+    public void StopRewindAction(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            RewindStop();
+        }
     }
 }
