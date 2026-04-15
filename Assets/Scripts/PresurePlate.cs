@@ -7,9 +7,11 @@ public class PresurePlate : MonoBehaviour
 {
     [SerializeField] GameObject TargetObject;
     [SerializeField] float ActivationTime;
+    [SerializeField] float MinActivationLength;
     // [SerializeField] Interactable[] ActivationTargets;
     [SerializeField] private SaintsDictionary<Interactable[], PresurePlate[]> ActivationTargets;
     float curActivationTime;
+    float curTimeActivated;
     bool activated;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,7 +35,7 @@ public class PresurePlate : MonoBehaviour
     {
         if (collision.gameObject == TargetObject && !activated)
         {
-            print("Button Pressed");
+            print($"Button Pressed {gameObject.name}");
             curActivationTime += Time.deltaTime;
             if (curActivationTime > ActivationTime)
             {

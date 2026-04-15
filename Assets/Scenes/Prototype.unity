@@ -322,7 +322,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 607832425485111841, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: ActivationTime
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 607832425485111841, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: 'managedReferences[-2]'
@@ -463,6 +463,10 @@ PrefabInstance:
     - target: {fileID: 3216218407358689002, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: m_Name
       value: RedButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 7354274369452151803, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
+      propertyPath: m_Name
+      value: default1
       objectReference: {fileID: 0}
     - target: {fileID: 8292854901848660415, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: m_Constraints
@@ -3016,6 +3020,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RedButton (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7354274369452151803, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
+      propertyPath: m_Name
+      value: default2
+      objectReference: {fileID: 0}
     - target: {fileID: 8292854901848660415, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: m_Constraints
       value: 122
@@ -3657,6 +3665,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrototypeDoor
   targetPosition: {x: -1.27, y: 1, z: 0}
+  debugopen: 0
+  debugclose: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
