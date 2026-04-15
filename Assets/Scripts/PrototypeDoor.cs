@@ -6,11 +6,29 @@ public class PrototypeDoor : Interactable
 {
     [SerializeField] private Vector3 targetPosition;
     private Vector3 initialPosition;
+
+    [SerializeField] bool debugopen;
+    [SerializeField] bool debugclose;
     private bool isOpen = false;
 
     void Start()
     {
         initialPosition = transform.localPosition;
+    }
+
+    void Update()
+    {
+        if (debugopen)
+        {
+            Activate();
+            debugopen = false;
+        }
+
+        if (debugclose)
+        {
+            DeActivate();
+            debugclose = false;
+        }
     }
 
     private IEnumerator LerpToTarget()
