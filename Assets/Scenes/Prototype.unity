@@ -322,7 +322,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 607832425485111841, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: ActivationTime
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 607832425485111841, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: 'managedReferences[-2]'
@@ -489,6 +489,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 607832425485111841, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
+      propertyPath: ActivationTime
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 2876002689892725840, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.27
@@ -2934,7 +2938,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 607832425485111841, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: ActivationTime
-      value: 1
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 607832425485111841, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: 'managedReferences[-2]'
