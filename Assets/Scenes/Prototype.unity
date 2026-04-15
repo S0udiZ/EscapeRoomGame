@@ -469,6 +469,10 @@ PrefabInstance:
       value: default1
       objectReference: {fileID: 0}
     - target: {fileID: 8292854901848660415, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8292854901848660415, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: m_Constraints
       value: 122
       objectReference: {fileID: 0}
@@ -3023,6 +3027,10 @@ PrefabInstance:
     - target: {fileID: 7354274369452151803, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: m_Name
       value: default2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8292854901848660415, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8292854901848660415, guid: fb83150f2e50a1f4d9ce8158116b81a3, type: 3}
       propertyPath: m_Constraints
