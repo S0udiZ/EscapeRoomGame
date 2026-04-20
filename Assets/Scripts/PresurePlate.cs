@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using SaintsField;
@@ -13,10 +14,12 @@ public class PresurePlate : MonoBehaviour
     float curActivationTime;
     float curTimeActivated;
     bool activated;
+
+    Vector3 movmentDirection;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        movmentDirection = (transform.position - TargetObject.transform.position).normalized;
     }
 
     // Update is called once per frame
@@ -58,6 +61,11 @@ public class PresurePlate : MonoBehaviour
 
     }
 
+    void Update()
+    {
+
+    }
+
     // void SendActivation()
     // {
     //     if (ActivationTargets.Length == 0) { return; }
@@ -95,6 +103,10 @@ public class PresurePlate : MonoBehaviour
                 }
             }
         }
+    }
+    IEnumerator Deactivate()
+    {
+        yield return new WaitForEndOfFrame();
     }
     void SendDeActivation()
     {

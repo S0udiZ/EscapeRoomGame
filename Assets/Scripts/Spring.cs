@@ -1,3 +1,4 @@
+using Oculus.Interaction;
 using UnityEngine;
 
 public class Spring : MonoBehaviour
@@ -8,10 +9,15 @@ public class Spring : MonoBehaviour
     [SerializeField] float SpringForce = 55;
     [SerializeField] float Dampaning = 10;
 
+    [SerializeField] float MaxLength;
+    [SerializeField] bool OneDirectonal;
 
+
+    Vector3 Direction;
     Rigidbody rb;
     void Start()
     {
+
         rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
@@ -21,6 +27,7 @@ public class Spring : MonoBehaviour
         {
             RestingDistance = (transform.position - ConnectedBody.position).magnitude;
         }
+        Direction = (transform.position - ConnectedBody.position).normalized;
     }
 
     void FixedUpdate()
@@ -35,6 +42,21 @@ public class Spring : MonoBehaviour
         Vector3 dampForce = rb.linearVelocity * -Dampaning;
 
         rb.AddForce(dampForce);
+
+        if (MaxLength > 0)
+        {
+            Vector3 diffVec = transform.position - ConnectedBody.position;
+            if (diffVec.sqrMagnitude > MaxLength * MaxLength)
+            {
+
+            }
+        }
+
+
+        if (OneDirectonal)
+        {
+
+        }
 
     }
 
