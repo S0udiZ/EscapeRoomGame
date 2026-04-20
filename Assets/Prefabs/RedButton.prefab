@@ -142,9 +142,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Spring
   ConnectedBody: {fileID: 5575107475681246776}
   RestingDistance: 0.5
+  stopDistance: 0.01
   AutoSetRestingDistance: 1
   SpringForce: 600
   Dampaning: 10
+  MaxLength: 0.1
+  OneDirectonal: 1
 --- !u!114 &607832425485111841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +162,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PresurePlate
   TargetObject: {fileID: 641183059330502016}
   ActivationTime: 0
-  ActivationTargets: []
+  MinActivationLength: 0
+  ActivationTargets:
+    _saintsKeys: []
+    _wrapTypeKey: 4
+    _saintsValues: []
+    _wrapTypeValue: 4
+    saintsSerializedVersion: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &2333748923809846203
 PrefabInstance:
   m_ObjectHideFlags: 0
