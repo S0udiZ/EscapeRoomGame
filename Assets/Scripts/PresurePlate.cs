@@ -15,11 +15,11 @@ public class PresurePlate : MonoBehaviour
     float curTimeActivated;
     bool activated;
 
-    Vector3 movmentDirection;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        movmentDirection = (transform.position - TargetObject.transform.position).normalized;
+
     }
 
     // Update is called once per frame
