@@ -175,6 +175,7 @@
   <Project Path="Meta.XR.Editor.UPST.Notifications.csproj" />
   <Project Path="Oculus.Interaction.Samples.Editor.csproj" />
   <Project Path="Unity.RenderPipeline.Universal.ShaderLibrary.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
   <Project Path="SaintsField.SaintsEditor.Issues.Issue377.csproj" />
   <Project Path="Meta.XR.Editor.Callbacks.csproj" />
   <Project Path="Meta.Wit.Dictation.Editor.csproj" />
