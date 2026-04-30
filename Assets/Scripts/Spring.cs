@@ -5,6 +5,7 @@ public class Spring : MonoBehaviour
 {
     [SerializeField] Transform ConnectedBody;
     [SerializeField] float RestingDistance = 0.5f;
+    [SerializeField] float stopDistance = 0.001f;
     [SerializeField] bool AutoSetRestingDistance = false;
     [SerializeField] float SpringForce = 55;
     [SerializeField] float Dampaning = 10;
@@ -13,11 +14,12 @@ public class Spring : MonoBehaviour
     [SerializeField] bool OneDirectonal;
 
 
-    Vector3 Direction;
+    Vector3 movDirection;
+    Vector3 startPos;
     Rigidbody rb;
     void Start()
     {
-
+        startPos = transform.position;
         rb = GetComponent<Rigidbody>();
         if (rb == null)
         {
@@ -27,13 +29,19 @@ public class Spring : MonoBehaviour
         {
             RestingDistance = (transform.position - ConnectedBody.position).magnitude;
         }
-        Direction = (transform.position - ConnectedBody.position).normalized;
+        movDirection = (transform.position - ConnectedBody.position).normalized;
     }
 
     void FixedUpdate()
     {
+
         Vector3 direction = (ConnectedBody.position - transform.position).normalized;
         Vector3 targetPos = -direction * RestingDistance + ConnectedBody.position;
+
+        if ((targetPos - transform.position).sqrMagnitude <= stopDistance * stopDistance)
+        {
+            return;
+        }
 
         Vector3 targetForce = (targetPos - transform.position) * SpringForce;
 
@@ -43,21 +51,32 @@ public class Spring : MonoBehaviour
 
         rb.AddForce(dampForce);
 
+        MovmentConstraints();
+
+
+
+    }
+
+    void MovmentConstraints()
+    {
         if (MaxLength > 0)
         {
             Vector3 diffVec = transform.position - ConnectedBody.position;
+
             if (diffVec.sqrMagnitude > MaxLength * MaxLength)
             {
-
+                Vector3 clampedDiff = Vector3.ClampMagnitude(diffVec, MaxLength);
+                transform.position = ConnectedBody.position + clampedDiff;
             }
         }
 
 
         if (OneDirectonal)
         {
-
+            float VecLength = (transform.position - ConnectedBody.position).magnitude;
+            Vector3 newDiff = VecLength * movDirection;
+            transform.position = ConnectedBody.position + newDiff;
         }
-
     }
 
 }
