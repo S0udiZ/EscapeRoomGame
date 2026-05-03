@@ -30,7 +30,7 @@ namespace UnitySimpleLiquid
         public float inertness = 50;
 
         [SerializeField]
-        private Color liquidColor = Color.green;
+        private Color defaultLiquidColor = Color.green;
 
         [Range(0f, 1f)]
         [SerializeField]
@@ -38,8 +38,12 @@ namespace UnitySimpleLiquid
 
         [Header("Container Volume")]
         [SerializeField]
-		private bool customVolume;
+        private bool customVolume;
         private float volume = 1f;
+
+        [Header("Infinte")]
+        [SerializeField]
+        private bool infinte;
 
         private SplitController splitController;
         public SplitController GetSplitController
@@ -82,6 +86,10 @@ namespace UnitySimpleLiquid
             }
             set
             {
+                if (infinte)
+                {
+                    return;
+                }
                 if (value > 0f)
                     fillAmountPercent = value;
                 else
@@ -110,32 +118,32 @@ namespace UnitySimpleLiquid
 		/// Container volume in liters
 		/// </summary>
         public float Volume
-		{
+        {
             get
-			{
-				return volume;
-			}
+            {
+                return volume;
+            }
             set
-			{
-				volume = value;
-			}
-		}
+            {
+                volume = value;
+            }
+        }
 
-		/// <summary>
-		/// Volume is fixed and not calculated automatically
-		/// </summary>
-		public bool CustomVolume
-		{
+        /// <summary>
+        /// Volume is fixed and not calculated automatically
+        /// </summary>
+        public bool CustomVolume
+        {
             get
-			{
-				return customVolume;
-			}
-		}
+            {
+                return customVolume;
+            }
+        }
 
-		/// <summary>
-		/// Need to map fill amount for more stable results
-		/// </summary>
-		private float MappedFillAmount
+        /// <summary>
+        /// Need to map fill amount for more stable results
+        /// </summary>
+        private float MappedFillAmount
         {
             get
             {
@@ -292,13 +300,13 @@ namespace UnitySimpleLiquid
         {
             get
             {
-                return liquidColor;
+                return defaultLiquidColor;
             }
             set
             {
-                liquidColor = value;
+                defaultLiquidColor = value;
                 if (MaterialInstance)
-                    MaterialInstance.color = liquidColor;
+                    MaterialInstance.color = defaultLiquidColor;
             }
         }
         #endregion
@@ -375,10 +383,10 @@ namespace UnitySimpleLiquid
             if (liquidRender == null)
                 return;
 
-            LiquidColor = liquidColor;
+            LiquidColor = defaultLiquidColor;
             FillAmountPercent = fillAmountPercent;
             IsOpen = isOpen;
-        } 
+        }
 
     }
 }
