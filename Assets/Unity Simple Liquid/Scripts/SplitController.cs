@@ -201,6 +201,7 @@ namespace UnitySimpleLiquid
 			var flowScale = 1f - (howLow + 1) * 0.5f + 0.2f;
 
 			var liquidStep = BottleneckRadiusWorld * splitSpeed * Time.deltaTime * flowScale;
+
 			var newLiquidAmmount = liquidContainer.FillAmountPercent - liquidStep;
 
 			// Check if amount is negative and change it to zero
@@ -267,7 +268,7 @@ namespace UnitySimpleLiquid
 				//Ignore ourself
 				if (!GameObject.ReferenceEquals(hit.collider.gameObject, ignoreCollision) && !hit.collider.isTrigger)
 				{
-
+					print($"{hit.transform.gameObject.name}");
 					// does it even a split controller
 					var liquid = hit.collider.GetComponent<SplitController>();
 					if (liquid && liquid != this)
