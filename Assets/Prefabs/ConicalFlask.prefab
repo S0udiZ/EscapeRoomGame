@@ -123,9 +123,10 @@ MonoBehaviour:
   cap: {fileID: 3240488580795514228}
   isOpen: 0
   inertness: 50
-  liquidColor: {r: 0, g: 1, b: 0, a: 0.23529412}
+  defaultLiquidColor: {r: 0, g: 1, b: 0, a: 1}
   fillAmountPercent: 1
   customVolume: 1
+  infinte: 0
 --- !u!114 &5530695964868740513
 MonoBehaviour:
   m_ObjectHideFlags: 0
