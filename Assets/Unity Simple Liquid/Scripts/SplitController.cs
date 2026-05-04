@@ -268,7 +268,6 @@ namespace UnitySimpleLiquid
 				//Ignore ourself
 				if (!GameObject.ReferenceEquals(hit.collider.gameObject, ignoreCollision) && !hit.collider.isTrigger)
 				{
-					print($"{hit.transform.gameObject.name}");
 					// does it even a split controller
 					var liquid = hit.collider.GetComponent<SplitController>();
 					if (liquid && liquid != this)
