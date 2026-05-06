@@ -80,7 +80,8 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 25f04334aada8ee49a265a9c7aaa3ea8, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -2362834893534956252, guid: 92774c1d1a4634a49ac7c95696da6eab, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -123,7 +124,7 @@ MonoBehaviour:
   cap: {fileID: 3240488580795514228}
   isOpen: 0
   inertness: 50
-  defaultLiquidColor: {r: 0, g: 1, b: 0, a: 1}
+  defaultLiquidColor: {r: 0, g: 1, b: 0, a: 0.23529412}
   fillAmountPercent: 1
   customVolume: 1
   infinte: 0
