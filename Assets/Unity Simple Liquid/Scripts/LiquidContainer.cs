@@ -1,5 +1,7 @@
 ﻿#pragma warning disable 0649
 
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace UnitySimpleLiquid
@@ -11,6 +13,7 @@ namespace UnitySimpleLiquid
     [ExecuteInEditMode]
     public class LiquidContainer : MonoBehaviour
     {
+
         public MeshRenderer liquidRender;
         private MeshFilter meshFilter;
 
@@ -29,12 +32,20 @@ namespace UnitySimpleLiquid
         [Tooltip("Smaller inertness - less still liquid")]
         public float inertness = 50;
 
+
         [SerializeField]
         private Color defaultLiquidColor = Color.green;
+
 
         [Range(0f, 1f)]
         [SerializeField]
         private float fillAmountPercent = 0.5f;
+
+        [SerializeField]
+        public List<Chemical> chemicals = new();
+
+        [SerializeField]
+        string test;
 
         [Header("Container Volume")]
         [SerializeField]
@@ -58,6 +69,34 @@ namespace UnitySimpleLiquid
 
         #region Liquid Amount
         // After this values shader might become unstable
+
+        [System.Serializable]
+        public struct Chemical
+        {
+            [Range(0.01f, 10f)]
+            public float Amount;
+            public string Type;
+            public Chemical(float _amount, string _type)
+            {
+                this.Amount = _amount;
+                this.Type = _type;
+            }
+        }
+
+        public int GetChemical(string Type)
+        {
+            for (int i = 0; i < chemicals.Count; i++)
+            {
+                if (chemicals[i].Type == Type)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+
+
         private const float minFillAmount = 0.1f;
         private const float maxFillAmount = 0.99f;
 
@@ -82,7 +121,8 @@ namespace UnitySimpleLiquid
         {
             get
             {
-                return fillAmountPercent;
+                ReCaculateTotalChemAmount();
+                return totalChemAmount / volume;
             }
             set
             {
@@ -91,9 +131,16 @@ namespace UnitySimpleLiquid
                     return;
                 }
                 if (value > 0f)
+                {
+                    SetChemcicals(value * volume);
                     fillAmountPercent = value;
+                }
+
                 else
+                {
+                    chemicals = new();
                     fillAmountPercent = 0f;
+                }
                 UpdateSurfacePos();
             }
         }
@@ -167,6 +214,38 @@ namespace UnitySimpleLiquid
                 scale.x * scale.y * scale.z * 1000;
         }
         #endregion
+        float totalChemAmount = 0f;
+
+        void SetChemcicals(float amount)
+        {
+            ReCaculateTotalChemAmount();
+
+
+            for (int i = 0; i < chemicals.Count; i++)
+            {
+                Chemical chem = chemicals[i];
+                if (chem.Amount == 0)
+                    chem.Amount = 0.01f;
+                chem.Amount = CaculateChemProcent(chem) * amount;
+
+                chemicals[i] = chem;
+            }
+            ReCaculateTotalChemAmount();
+        }
+
+        void ReCaculateTotalChemAmount()
+        {
+            totalChemAmount = 0;
+            foreach (Chemical item in chemicals)
+            {
+                totalChemAmount += item.Amount;
+            }
+        }
+
+        public float CaculateChemProcent(Chemical chem)
+        {
+            return chem.Amount / totalChemAmount;
+        }
 
         #region Liquid Surface
         private Vector3 surfaceLevel;

@@ -126,6 +126,8 @@ MonoBehaviour:
   inertness: 50
   defaultLiquidColor: {r: 0, g: 1, b: 0, a: 0.23529412}
   fillAmountPercent: 1
+  chemicals: []
+  test: 
   customVolume: 1
   infinte: 0
 --- !u!114 &5530695964868740513
