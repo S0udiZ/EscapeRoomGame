@@ -250,32 +250,6 @@ namespace UnitySimpleLiquid
 				//color change in capacity
 				SendLiquidContainer(liquid.liquidContainer);
 
-				SendChem(liquid.liquidContainer, lostAmount);
-			}
-		}
-
-		void SendChem(LiquidContainer lc, float lostAmount)
-		{
-			foreach (var Chemical in liquidContainer.chemicals)
-			{
-
-				int lcChemindex = lc.GetChemical(Chemical.Type);
-				LiquidContainer.Chemical lcChem;
-				//We make sure that it has the Chemicals we are trying to transfer to it
-				if (lcChemindex == -1)
-				{
-					lc.chemicals.Add(new(0, Chemical.Type));
-					lcChemindex = lc.chemicals.Count - 1;
-					lcChem = lc.chemicals[lcChemindex];
-				}
-				else
-				{
-					lcChem = lc.chemicals[lcChemindex];
-				}
-				float procentloss = liquidContainer.CaculateChemProcent((LiquidContainer.Chemical)lcChem);
-				float chemAmountLoss = procentloss * lostAmount;
-				lcChem.Amount += chemAmountLoss;
-				lc.chemicals[lcChemindex] = lcChem;
 			}
 		}
 

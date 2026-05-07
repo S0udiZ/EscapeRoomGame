@@ -56,7 +56,7 @@ MonoBehaviour:
   inertness: 50
   defaultLiquidColor: {r: 0, g: 1, b: 0, a: 1}
   fillAmountPercent: 0.653
-  chemicals: []
+  chemicalProcents: []
   test: 
   customVolume: 0
   infinte: 0
