@@ -167,9 +167,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f84b3f6b42656c348b552a2d68fbc8af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5327263221063125037}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f84b3f6b42656c348b552a2d68fbc8af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 575029593756115990}
     - targetCorrespondingSourceObject: {fileID: 4039022864529267377, guid: f84b3f6b42656c348b552a2d68fbc8af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 217444285803277408}
+    - targetCorrespondingSourceObject: {fileID: 4039022864529267377, guid: f84b3f6b42656c348b552a2d68fbc8af, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5494299230930900855}
     - targetCorrespondingSourceObject: {fileID: -6687755196947675576, guid: f84b3f6b42656c348b552a2d68fbc8af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3202424343724399134}
@@ -205,7 +211,21 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
+--- !u!114 &5494299230930900855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5355057255335269692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225d3eddbfeff9540be0c834cea240de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeTrakedRigidBody
+  rewind: 0
+  TimeExempt: 0
 --- !u!1 &5867578720565905861 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6687755196947675576, guid: f84b3f6b42656c348b552a2d68fbc8af, type: 3}
@@ -497,3 +517,17 @@ MonoBehaviour:
   on_trigger_release:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &575029593756115990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9123422062778299100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 225d3eddbfeff9540be0c834cea240de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeTrakedRigidBody
+  rewind: 0
+  TimeExempt: 0
