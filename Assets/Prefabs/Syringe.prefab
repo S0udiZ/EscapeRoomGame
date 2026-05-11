@@ -116,10 +116,13 @@ MonoBehaviour:
   cap: {fileID: 0}
   isOpen: 0
   inertness: 100
-  defaultLiquidColor: {r: 0, g: 1, b: 0, a: 0.23529412}
+  defaultLiquidColor: {r: 0, g: 0, b: 0, a: 0}
   fillAmountPercent: 0.751
+  chemicalProcents: []
+  test: 
   customVolume: 0
   infinte: 0
+  DebugButton: 0
 --- !u!54 &6667394452830195248
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -245,11 +245,29 @@ namespace UnitySimpleLiquid
 			if (insideRadius)
 			{
 				var lostAmount = liquidContainer.Volume * lostPercentAmount;
-				liquid.liquidContainer.FillAmount += lostAmount;
+				//liquid.liquidContainer.FillAmount += lostAmount;
+
 
 				//color change in capacity
-				SendLiquidContainer(liquid.liquidContainer);
+				//SendLiquidContainer(liquid.liquidContainer);
 
+				SendChemicals(liquid.liquidContainer, lostAmount);
+
+			}
+		}
+
+		public void SendChemicals(LiquidContainer lc, float lostLiqudAmount)
+		{
+			foreach (LiquidContainer.Chemical chemical in liquidContainer.ChemProcents)
+			{
+				lc.AddChemical(chemical.Type);
+				int thisChemIndex = liquidContainer.ChemIndexs[chemical.Type];
+				float chemVolume = liquidContainer.GetChemVolume(thisChemIndex);
+				float lostChemAmount = lostLiqudAmount * chemical.Amount;
+
+				int lcChemIndex = lc.ChemIndexs[chemical.Type];
+				float setChemAmount = lostChemAmount + lc.GetChemVolume(lcChemIndex);
+				lc.SetChemVolume(lcChemIndex, setChemAmount);
 			}
 		}
 
