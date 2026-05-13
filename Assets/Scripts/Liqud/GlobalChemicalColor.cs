@@ -8,7 +8,7 @@ namespace UnitySimpleLiquid
 {
 
     [CreateAssetMenu(fileName = "GlobalChemicalColor", menuName = "Scriptable Objects/GlobalChemicalColor")]
-    public class GlobalChemicalColor : ScriptableSingleton<GlobalChemicalColor>
+    public class GlobalChemicalColor : ScriptableObject
     {
         [SerializeField]
         SaintsDictionary<string, Color> chemicalColors;

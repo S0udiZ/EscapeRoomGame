@@ -4,7 +4,7 @@ using UnityEngine;
 namespace UnitySimpleLiquid
 {
     [CreateAssetMenu(fileName = "GlobalChemicals", menuName = "Scriptable Objects/GlobalChemicals")]
-    public class GlobalChemicalReactions : ScriptableSingleton<GlobalChemicalReactions>
+    public class GlobalChemicalReactions : ScriptableObject
     {
 
         [Serializable]

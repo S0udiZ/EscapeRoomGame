@@ -206,7 +206,8 @@ namespace UnitySimpleLiquid
                 this.Type = _type;
             }
         }
-
+        [SerializeField]
+        GlobalChemicalColor ChemicalColorsInstance;
         private void UpdateColor()
         {
             Color totalColor = new(0, 0, 0, 0);
@@ -216,9 +217,9 @@ namespace UnitySimpleLiquid
             {
                 foreach (Chemical chem in ChemProcents)
                 {
-                    if (GlobalChemicalColor.instance.ChemicalColors.ContainsKey(chem.Type))
+                    if (ChemicalColorsInstance.ChemicalColors.ContainsKey(chem.Type))
                     {
-                        totalColor += GlobalChemicalColor.instance.ChemicalColors[chem.Type] * chem.Amount;
+                        totalColor += ChemicalColorsInstance.ChemicalColors[chem.Type] * chem.Amount;
                     }
                     else
                     {
@@ -374,7 +375,8 @@ namespace UnitySimpleLiquid
 
         #region Mixing
         bool staticBlend = false;
-        GlobalChemicalReactions.ReactionSchema[] reactionSchema = GlobalChemicalReactions.instance.reactionSchema;
+        [SerializeField]
+        GlobalChemicalReactions.ReactionSchema[] reactionSchema;
 
         void MixChemicals()
         {

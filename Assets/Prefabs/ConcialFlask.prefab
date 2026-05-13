@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7638104345217537351, guid: e929373f9d686e94790001551cc56453, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8362715563385882661, guid: e929373f9d686e94790001551cc56453, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -113,14 +113,18 @@ MonoBehaviour:
   liquidRender: {fileID: 5379912306973004157}
   liquidMaterial: {fileID: 2100000, guid: 8dec526bbd84d684da6f40f79c3ab1bd, type: 2}
   cap: {fileID: 6201669392942238364}
-  isOpen: 0
+  isOpen: 1
   inertness: 50
-  defaultLiquidColor: {r: 0, g: 0, b: 0, a: 0}
-  fillAmountPercent: 0.85
-  chemicalProcents: []
+  defaultLiquidColor: {r: 0, g: 1, b: 0.46625066, a: 1}
+  fillAmountPercent: 0.855
+  chemicalProcents:
+  - Amount: 1
+    Type: U
   test: 
   customVolume: 0
   infinte: 1
+  ChemicalColorsInstance: {fileID: 11400000, guid: a3c33ee6678fbc3479de8a3f55fe0332, type: 2}
+  reactionSchema: []
   DebugButton: 0
 --- !u!114 &7720110317434415144
 MonoBehaviour:
