@@ -53,6 +53,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 464aa04afb891ce4abe9d636995a6927, type: 2}
     - target: {fileID: -772798723794940250, guid: e929373f9d686e94790001551cc56453, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -772798723794940250, guid: e929373f9d686e94790001551cc56453, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 0}
@@ -115,11 +119,19 @@ MonoBehaviour:
   cap: {fileID: 6201669392942238364}
   isOpen: 1
   inertness: 50
+<<<<<<< HEAD
   defaultLiquidColor: {r: 0, g: 1, b: 0.46625066, a: 1}
   fillAmountPercent: 0.855
   chemicalProcents:
   - Amount: 1
     Type: U
+=======
+  defaultLiquidColor: {r: 0, g: 0, b: 0, a: 0}
+  fillAmountPercent: 0.85
+  chemicalProcents:
+  - Amount: 1
+    Type: H2O
+>>>>>>> af2e214a13cec0b1bc9cb2d21d79dc9e09328c42
   test: 
   customVolume: 0
   infinte: 1
