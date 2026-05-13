@@ -66,8 +66,8 @@ namespace UnitySimpleLiquid
         private void Start()
         {
             splitController = GetComponent<SplitController>();
+            reactionSchema = GlobalReaction.reactionSchema;
             SetCurChemsIndexs();
-
         }
 
         #region Liquid Amount
@@ -376,6 +376,7 @@ namespace UnitySimpleLiquid
         #region Mixing
         bool staticBlend = false;
         [SerializeField]
+        GlobalChemicalReactions GlobalReaction;
         GlobalChemicalReactions.ReactionSchema[] reactionSchema;
 
         void MixChemicals()
