@@ -1,5 +1,6 @@
 ﻿#pragma warning disable 0649
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -42,7 +43,7 @@ namespace UnitySimpleLiquid
         private float fillAmountPercent = 0.5f;
 
         [SerializeField]
-        public List<Chemical> chemicalProcents = new();
+        private List<Chemical> chemicalProcents = new();
 
         [SerializeField]
         string test;
@@ -62,15 +63,10 @@ namespace UnitySimpleLiquid
             get { return splitController; }
         }
 
-        bool started = false;
         private void Start()
         {
             splitController = GetComponent<SplitController>();
-            if (!started)
-            {
-                SetChemVolume(0, 0.5f);
-                started = true;
-            }
+            SetCurChemsIndexs();
 
         }
 
@@ -119,6 +115,7 @@ namespace UnitySimpleLiquid
                 else
                 {
                     fillAmountPercent = 0f;
+                    ClearChems();
                 }
                 UpdateSurfacePos();
             }
@@ -210,6 +207,69 @@ namespace UnitySimpleLiquid
             }
         }
 
+        private void UpdateColor()
+        {
+            Color totalColor = new(0, 0, 0, 0);
+            float totalAmount = 0;
+
+            if (chemicalProcents.Count > 0)
+            {
+                foreach (Chemical chem in ChemProcents)
+                {
+                    if (GlobalChemicalColor.instance.ChemicalColors.ContainsKey(chem.Type))
+                    {
+                        totalColor += GlobalChemicalColor.instance.ChemicalColors[chem.Type] * chem.Amount;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    totalAmount += chem.Amount;
+                }
+            }
+            else
+            {
+                totalAmount = 1;
+            }
+
+            Color newLiqudColor = totalColor / totalAmount;
+            LiquidColor = newLiqudColor;
+
+        }
+
+        public Dictionary<string, int> ChemIndexs = new();
+        void AddChemIndex(string Type)
+        {
+            if (ChemIndexs.ContainsKey(Type))
+                return;
+
+            ChemIndexs.Add(Type, ChemIndexs.Count);
+        }
+
+        public void AddChemical(string Type)
+        {
+            if (ChemIndexs.ContainsKey(Type))
+                return;
+
+            ChemProcents.Add(new(0, Type));
+            AddChemIndex(Type);
+        }
+
+        void ClearChems()
+        {
+            ChemProcents = new();
+            ChemIndexs = new();
+        }
+
+        void SetCurChemsIndexs()
+        {
+            ChemIndexs = new();
+            foreach (Chemical chem in ChemProcents)
+            {
+                AddChemIndex(chem.Type);
+            }
+        }
+
         public List<Chemical> ChemProcents
         {
             get
@@ -236,21 +296,20 @@ namespace UnitySimpleLiquid
             }
         }
 
-        Chemical GetChemVolume(int index)
+        public float GetChemVolume(int index)
         {
             float volume = ChemProcents[index].Amount * FillAmount;
 
             Chemical chem = ChemProcents[index];
             chem.Amount = volume;
 
-            return chem;
+            return chem.Amount;
         }
-
-        void SetChemVolume(int index, float chemVolume)
+        public void SetChemVolume(int index, float chemVolume)
         {
 
             float totalVolume = 0f;
-            for (int i = 0; i < chemicalProcents.Count; i++)
+            for (int i = 0; i < ChemProcents.Count; i++)
             {
                 if (i == index)
                 {
@@ -258,15 +317,13 @@ namespace UnitySimpleLiquid
                 }
                 else
                 {
-                    totalVolume += GetChemVolume(i).Amount;
+                    totalVolume += GetChemVolume(i);
                 }
             }
 
-            print($"Total Volume: {totalVolume}");
-
-            for (int i = 0; i < chemicalProcents.Count; i++)
+            for (int i = 0; i < ChemProcents.Count; i++)
             {
-                Chemical chem = ChemProcents[index];
+                Chemical chem = ChemProcents[i];
 
                 float newProcent;
 
@@ -276,23 +333,20 @@ namespace UnitySimpleLiquid
                 }
                 else
                 {
-                    newProcent = GetChemVolume(i).Amount / totalVolume;
+                    newProcent = GetChemVolume(i) / totalVolume;
                 }
-                print($"New Procent: {newProcent}");
                 chem.Amount = newProcent;
-                ChemProcents[index] = chem;
+                ChemProcents[i] = chem;
             }
 
             FillAmount = totalVolume;
-
-
+            UpdateColor();
+            staticBlend = false;
         }
 
         void ChemcProcentFixup()
         {
             //First we caculate the total amount and get the relative procentage
-
-            return;
             float totalAmount = 0;
 
             foreach (Chemical chem in ChemProcents)
@@ -315,8 +369,87 @@ namespace UnitySimpleLiquid
 
         }
 
+        //This varbile stores if the blend has changed so it doesn't check without reason
+        #endregion
+
+        #region Mixing
+        bool staticBlend = false;
+        GlobalChemicalReactions.ReactionSchema[] reactionSchema = GlobalChemicalReactions.instance.reactionSchema;
+
+        void MixChemicals()
+        {
+            if (staticBlend)
+            {
+                return;
+            }
+
+            staticBlend = true;
+
+            foreach (var reaction in reactionSchema)
+            {
+                if (ChemIndexs.ContainsKey(reaction.Reaction.ChemicalA) && ChemIndexs.ContainsKey(reaction.Reaction.ChemicalB))
+                {
+                    staticBlend = false;
+
+                    int chemAIndex = ChemIndexs[reaction.Reaction.ChemicalA];
+                    int chemBIndex = ChemIndexs[reaction.Reaction.ChemicalB];
+
+                    float chemAVolume = GetChemVolume(chemAIndex);
+                    float chemBVolume = GetChemVolume(chemBIndex);
+
+                    float amountLiqudReacted = reaction.ReactionRate * Time.deltaTime;
+
+                    //Checks if both reagents are the same so it can remove the correct amount;
+                    if (reaction.Reaction.ChemicalA == reaction.Reaction.ChemicalB)
+                    {
+                        if (chemBVolume / 2 < amountLiqudReacted)
+                        {
+                            amountLiqudReacted = chemBVolume / 2;
+                        }
+                        chemAVolume -= amountLiqudReacted * 2;
+                        SetChemVolume(chemAIndex, chemAVolume);
+                    }
+                    else
+                    {
+                        if (chemAVolume < amountLiqudReacted)
+                        {
+                            amountLiqudReacted = chemAVolume;
+                        }
+                        if (chemBVolume < amountLiqudReacted)
+                        {
+                            amountLiqudReacted = chemBVolume;
+                        }
+                        chemAVolume -= amountLiqudReacted;
+                        chemBVolume -= amountLiqudReacted;
+                        SetChemVolume(chemAIndex, chemAVolume);
+                        SetChemVolume(chemBIndex, chemBVolume);
+                    }
 
 
+                    if (reaction.Result.ChemicalA != "")
+                    {
+                        AddChemical(reaction.Result.ChemicalA);
+
+                        int chemRAIndex = ChemIndexs[reaction.Result.ChemicalA];
+
+                        float newChemRAVolume = GetChemVolume(chemRAIndex) + amountLiqudReacted;
+                        SetChemVolume(chemRAIndex, newChemRAVolume);
+
+                    }
+
+                    if (reaction.Result.ChemicalB != "")
+                    {
+                        AddChemical(reaction.Result.ChemicalB);
+
+                        int chemRBIndex = ChemIndexs[reaction.Result.ChemicalB];
+
+                        float newChemRBVolume = GetChemVolume(chemRBIndex) + amountLiqudReacted;
+                        SetChemVolume(chemRBIndex, newChemRBVolume);
+                    }
+
+                }
+            }
+        }
 
 
 
@@ -340,6 +473,8 @@ namespace UnitySimpleLiquid
                     MaterialInstance.SetVector(SurfaceLevelID, value);
             }
         }
+
+
 
         private void UpdateSurfacePos()
         {
@@ -529,17 +664,28 @@ namespace UnitySimpleLiquid
                 volume = CalculateVolume();
 
             if (Application.isPlaying)
+            {
                 UpdateWoble();
+                MixChemicals();
+            }
         }
+
+        [SerializeField]
+        bool DebugButton = false;
 
         private void OnValidate()
         {
+            if (DebugButton)
+            {
+                DebugButton = false;
+                SetChemVolume(0, 0.5f);
+            }
             if (liquidRender == null)
                 return;
-
-            LiquidColor = defaultLiquidColor;
             FillAmountPercent = fillAmountPercent;
             ChemcProcentFixup();
+            SetCurChemsIndexs();
+            UpdateColor();
             IsOpen = isOpen;
         }
 
