@@ -653,6 +653,8 @@ namespace UnitySimpleLiquid
             lastPos = transform.position;
             lastUp = transform.up;
         }
+        [NonSerialized]
+        public bool TimeFrozen = false;
 
         private void Update()
         {
@@ -668,13 +670,17 @@ namespace UnitySimpleLiquid
 
             if (Application.isPlaying)
             {
+
                 UpdateWoble();
-                MixChemicals();
+                if (!TimeFrozen)
+                    MixChemicals();
             }
         }
 
         [SerializeField]
         bool DebugButton = false;
+
+
 
         private void OnValidate()
         {

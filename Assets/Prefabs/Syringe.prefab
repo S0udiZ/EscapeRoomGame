@@ -122,6 +122,8 @@ MonoBehaviour:
   test: 
   customVolume: 0
   infinte: 0
+  ChemicalColorsInstance: {fileID: 0}
+  GlobalReaction: {fileID: 0}
   DebugButton: 0
 --- !u!54 &6667394452830195248
 Rigidbody:

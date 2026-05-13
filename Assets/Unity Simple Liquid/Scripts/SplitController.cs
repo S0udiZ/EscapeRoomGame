@@ -408,6 +408,10 @@ namespace UnitySimpleLiquid
 		private void Update()
 		{
 			// Update bottleneck and surface from last update
+			if (liquidContainer.TimeFrozen)
+			{
+				return;
+			}
 			bottleneckPlane = GenerateBottleneckPlane();
 			BottleneckPos = GenerateBottleneckPos();
 			surfacePlane = liquidContainer.GenerateSurfacePlane();
