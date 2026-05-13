@@ -248,7 +248,7 @@ MonoBehaviour:
   cap: {fileID: 0}
   isOpen: 0
   inertness: 50
-  defaultLiquidColor: {r: 0, g: 1, b: 0.9193516, a: 1}
+  defaultLiquidColor: {r: 0, g: 0.97214127, b: 1, a: 1}
   fillAmountPercent: 0.5
   chemicalProcents:
   - Amount: 1
@@ -256,6 +256,9 @@ MonoBehaviour:
   test: 
   customVolume: 0
   infinte: 1
+  ChemicalColorsInstance: {fileID: 11400000, guid: a3c33ee6678fbc3479de8a3f55fe0332, type: 2}
+  GlobalReaction: {fileID: 11400000, guid: 952827f6e2753b041a3f7be2a2e7faac, type: 2}
+  DebugButton: 0
 --- !u!23 &6663367760553575264 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -5898439553302688531, guid: f84b3f6b42656c348b552a2d68fbc8af, type: 3}
