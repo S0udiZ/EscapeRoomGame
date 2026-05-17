@@ -20,3 +20,17 @@ MonoBehaviour:
       ChemicalA: USSRA
       ChemicalB: USSRA
     ReactionRate: 1
+  - Reaction:
+      ChemicalA: HCl
+      ChemicalB: H2O
+    Result:
+      ChemicalA: CherryPepsi
+      ChemicalB: CherryPepsi
+    ReactionRate: 1
+  - Reaction:
+      ChemicalA: U
+      ChemicalB: H2O
+    Result:
+      ChemicalA: H2U
+      ChemicalB: H2U
+    ReactionRate: 1
