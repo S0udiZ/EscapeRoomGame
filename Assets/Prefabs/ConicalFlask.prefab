@@ -137,7 +137,7 @@ MonoBehaviour:
   cap: {fileID: 6201669392942238364}
   isOpen: 1
   inertness: 50
-  defaultLiquidColor: {r: 0, g: 0.97214127, b: 1, a: 1}
+  defaultLiquidColor: {r: 0.21568628, g: 0.42352942, b: 0.8352941, a: 1}
   fillAmountPercent: 0.85
   chemicalProcents:
   - Amount: 1

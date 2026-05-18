@@ -208,7 +208,7 @@ namespace UnitySimpleLiquid
         }
         [SerializeField]
         GlobalChemicalColor ChemicalColorsInstance;
-        private void UpdateColor()
+        public void UpdateColor()
         {
             Color totalColor = new(0, 0, 0, 0);
             float totalAmount = 0;
@@ -374,7 +374,8 @@ namespace UnitySimpleLiquid
         #endregion
 
         #region Mixing
-        bool staticBlend = false;
+        [NonSerialized]
+        public bool staticBlend = false;
         [SerializeField]
         GlobalChemicalReactions GlobalReaction;
         GlobalChemicalReactions.ReactionSchema[] reactionSchema;
