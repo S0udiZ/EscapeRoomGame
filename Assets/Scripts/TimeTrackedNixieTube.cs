@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+
+[RequireComponent(typeof(NixieTube))]
 public class TimeTrakedNixeTube : TimeTrakedObject
 {
     //Lists

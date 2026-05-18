@@ -4,6 +4,8 @@ using UnitySimpleLiquid;
 using UnityEngine.Rendering;
 using System.Linq;
 
+[RequireComponent(typeof(LiquidContainer))]
+
 public class TimeTrackedLiqudContainer : TimeTrakedObject
 {
 
