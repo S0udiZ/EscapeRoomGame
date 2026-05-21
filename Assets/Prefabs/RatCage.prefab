@@ -248,11 +248,11 @@ MonoBehaviour:
   cap: {fileID: 0}
   isOpen: 0
   inertness: 50
-  defaultLiquidColor: {r: 0, g: 0.97214127, b: 1, a: 1}
+  defaultLiquidColor: {r: 0.37254903, g: 0.54509807, b: 0.5686275, a: 1}
   fillAmountPercent: 0.5
   chemicalProcents:
   - Amount: 1
-    Type: H2O
+    Type: H2U
   test: 
   customVolume: 0
   infinte: 1

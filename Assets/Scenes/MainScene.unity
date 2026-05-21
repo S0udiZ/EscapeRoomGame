@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1116400453484304405, guid: 6a8ad6fd37a7cd946957ab3661a0f7d9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1116400453484304405, guid: 6a8ad6fd37a7cd946957ab3661a0f7d9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -145,27 +145,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1116400453484304405, guid: 6a8ad6fd37a7cd946957ab3661a0f7d9, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.5
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1116400453484304405, guid: 6a8ad6fd37a7cd946957ab3661a0f7d9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1116400453484304405, guid: 6a8ad6fd37a7cd946957ab3661a0f7d9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.5
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1116400453484304405, guid: 6a8ad6fd37a7cd946957ab3661a0f7d9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1116400453484304405, guid: 6a8ad6fd37a7cd946957ab3661a0f7d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1116400453484304405, guid: 6a8ad6fd37a7cd946957ab3661a0f7d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -90
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 1116400453484304405, guid: 6a8ad6fd37a7cd946957ab3661a0f7d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1277,7 +1277,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.21568628, g: 0.42352942, b: 0.8352941, a: 1}
+    - _Color: {r: 0.37254903, g: 0.54509807, b: 0.5686275, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GravityDirection: {r: 0, g: -1, b: 0, a: 0}
     - _SurfaceLevel: {r: 1.885403, g: 1.1346754, b: 1.2818327, a: 0}
