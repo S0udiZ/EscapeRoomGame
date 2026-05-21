@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 2243344527426154507}
   - component: {fileID: 8028918040775334066}
   - component: {fileID: 2778343623551324042}
+  - component: {fileID: 472938422679604153}
   m_Layer: 0
   m_Name: ConicalFlask
   m_TagString: Untagged
@@ -278,6 +279,8 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0, w: 0}
     interactables: []
     snapables: []
+    grabbing: 0
+    trigger: 0
   snapped_point: {fileID: 0}
   on_grab:
     m_PersistentCalls:
@@ -303,6 +306,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 225d3eddbfeff9540be0c834cea240de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeTrakedRigidBody
+  rewind: 0
+  TimeExempt: 0
+--- !u!114 &472938422679604153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3687981675976729226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c199c4d296534a4ab77dc10150620a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeTrackedLiqudContainer
   rewind: 0
   TimeExempt: 0
 --- !u!1 &3708583344906429064

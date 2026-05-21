@@ -47,12 +47,12 @@ public class TimeManager : MonoBehaviour
         if (DebugButtonRStart)
         {
             DebugButtonRStart = false;
-            StartCoroutine(StartRewind());
+            StartTimeReverse();
         }
         if (DebugButtonRStop)
         {
             DebugButtonRStop = false;
-            RewindStop();
+            StopTimeReverse();
         }
     }
 
@@ -85,19 +85,14 @@ public class TimeManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    public void StartRewindAction(InputAction.CallbackContext context)
+    public void StartTimeReverse()
     {
-        if (context.started)
-        {
-            StartCoroutine(StartRewind());
-        }
+        StartCoroutine(StartRewind());
+    }
+    public void StopTimeReverse()
+    {
+        RewindStop();
     }
 
-    public void StopRewindAction(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            RewindStop();
-        }
-    }
+
 }

@@ -307,6 +307,8 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0, w: 0}
     interactables: []
     snapables: []
+    grabbing: 0
+    trigger: 0
   snapped_point: {fileID: 0}
   on_grab:
     m_PersistentCalls:

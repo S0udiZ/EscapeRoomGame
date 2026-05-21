@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Mathematics;
 using System.Linq;
+using System;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
     [Tooltip("The controller variables")]
     public Controller l_hand, r_hand;
     public LayerMask teleport_colliders;
+
+
 
     private void Start()
     {
@@ -61,11 +65,11 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         while (teleporting)
         {
-            if(Physics.Raycast(r_hand.controller.transform.position, r_hand.controller.transform.forward, out hit, 5 * transform.localScale.y, teleport_colliders))
+            if (Physics.Raycast(r_hand.controller.transform.position, r_hand.controller.transform.forward, out hit, 5 * transform.localScale.y, teleport_colliders))
             {
                 line.startColor = Color.blue;
                 line.endColor = Color.red;
-                if (VR_Teleport.Teleport(hit.point) != new Vector3(9999,9999,9999))
+                if (VR_Teleport.Teleport(hit.point) != new Vector3(9999, 9999, 9999))
                 {
                     line.endColor = Color.green;
                 }
@@ -105,7 +109,7 @@ public class Head
     [Tooltip("head rotation input"), Header("Head rotation")]
     public InputAction
         hmd_rotation_action;
-    [HideInInspector]    
+    [HideInInspector]
     public GameObject body;
     Rigidbody rb;
 
@@ -200,8 +204,8 @@ public class Controller
     public void UpdatePos(InputAction.CallbackContext context)
     {
         rb.linearVelocity = ((Vector3.Scale(context.ReadValue<Vector3>(), body.transform.localScale) + body.transform.position - rb.position) * 20f);
-        
-        if(grabbed_object)
+
+        if (grabbed_object)
         {
             //Vector3 dir;
             //if (left_controller)
@@ -266,7 +270,7 @@ public class Controller
                     snapablePoint = ClosestSnappingPoint;
                 }
             }
-            else if(snapablePoint != null)
+            else if (snapablePoint != null)
             {
                 snapablePoint.HideExampleModel();
                 snapablePoint = null;
@@ -332,6 +336,9 @@ public class Controller
         rb.angularVelocity = angularVelocity * 20;
     }
 
+    //[NonSerialized]
+    public bool grabbing;
+
     public void Grab(InputAction.CallbackContext context)
     {
         //Vector3 dir;
@@ -392,6 +399,8 @@ public class Controller
             {
                 //Grip fist animation
                 controller_animator.SetTrigger("Fist");
+                grabbing = true;
+
                 //Debug.Log("fist");
             }
         }
@@ -399,9 +408,12 @@ public class Controller
         {
             //Grip fist animation
             controller_animator.SetTrigger("Fist");
+            grabbing = true;
             //Debug.Log("fist");
         }
     }
+
+
 
     public void Drop(InputAction.CallbackContext context)
     {
@@ -480,6 +492,7 @@ public class Controller
         {
             //Grip idle animation
             controller_animator.SetTrigger("Idle");
+            grabbing = false;
         }
     }
 
@@ -507,7 +520,8 @@ public class Controller
         grabbed_object = object_to_attach.Grabbed(this);
         controller_animator.SetTrigger("GrabLarge");
     }
-
+    //[NonSerialized]
+    public bool trigger;
     public void Trigger(InputAction.CallbackContext context)
     {
         if (grabbed_object)
@@ -517,6 +531,7 @@ public class Controller
         }
         else
         {
+            trigger = true;
             //index_fold animation
         }
     }
@@ -529,6 +544,7 @@ public class Controller
         }
         else
         {
+            trigger = false;
             //index_idle animation
         }
     }
