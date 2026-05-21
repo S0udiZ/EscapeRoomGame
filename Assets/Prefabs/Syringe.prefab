@@ -124,13 +124,8 @@ MonoBehaviour:
   test: 
   customVolume: 0
   infinte: 0
-<<<<<<< HEAD
-  ChemicalColorsInstance: {fileID: 0}
-  GlobalReaction: {fileID: 0}
-=======
   ChemicalColorsInstance: {fileID: 11400000, guid: a3c33ee6678fbc3479de8a3f55fe0332, type: 2}
   GlobalReaction: {fileID: 11400000, guid: 952827f6e2753b041a3f7be2a2e7faac, type: 2}
->>>>>>> 91c3a1edda5ea82a38c91f49591c7c2aa42d7031
   DebugButton: 0
 --- !u!54 &6667394452830195248
 Rigidbody:
