@@ -4,11 +4,11 @@ using UnityEngine;
 public class TimePlayerManager : MonoBehaviour
 {
     //The hand that gets checked first
-    int handprioty = 0;
-    Player player;
-    Controller rhand, lhand;
 
-    Controller[] hands;
+
+    [SerializeField]
+    GameObject RadationSphere;
+    RadationSphere radationSphere;
 
     [SerializeField]
     float ActivateDistance;
@@ -16,6 +16,10 @@ public class TimePlayerManager : MonoBehaviour
     [SerializeField]
     TimeManager timeManager;
 
+    int handprioty = 0;
+    Player player;
+    Controller rhand, lhand;
+    Controller[] hands;
     bool timeActivated = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,6 +30,7 @@ public class TimePlayerManager : MonoBehaviour
         hands = new Controller[2];
         hands[0] = rhand;
         hands[1] = lhand;
+        radationSphere = RadationSphere.GetComponent<RadationSphere>();
     }
 
     // Update is called once per frame
@@ -75,10 +80,10 @@ public class TimePlayerManager : MonoBehaviour
         if (timeActivated == false)
         {
             timeActivated = true;
-            print("Yay");
             StopAllCoroutines();
+            RadationSphere.SetActive(true);
+            RadationSphere.transform.position = hands[handprioty].controller.transform.position;
             StartCoroutine(TimeControl());
-
         }
     }
 
@@ -112,18 +117,24 @@ public class TimePlayerManager : MonoBehaviour
             distance = Vector3.Distance(startPos, handObj.transform.position);
             print($"Distance: {distance} | {Time.time}");
 
+            radationSphere.Hand = handObj.transform;
+
             if (!timeReversed && distance > ActivateDistance)
             {
                 timeReversed = true;
                 timeManager.StartTimeReverse();
+                radationSphere.Reversed = true;
             }
             else if (timeReversed && distance < ActivateDistance)
             {
                 timeReversed = false;
                 timeManager.StopTimeReverse();
+                radationSphere.Reversed = false;
             }
 
         }
+
+        RadationSphere.SetActive(false);
 
 
     }

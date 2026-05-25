@@ -289,11 +289,17 @@ namespace UnitySimpleLiquid
 					var liquid = hit.collider.GetComponent<SplitController>();
 					if (liquid && liquid != this)
 					{
-
-
 						return hit;
 					}
 
+					Lock hitLock = hit.collider.GetComponent<Lock>();
+					if (hitLock)
+					{
+						if (liquidContainer.ChemIndexs.ContainsKey("HCl"))
+						{
+							hitLock.Activate();
+						}
+					}
 
 					//Something other than a liquid splitter is in the way
 					if (!liquid)
