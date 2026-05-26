@@ -32,13 +32,24 @@ public abstract class TimeTrakedObject : MonoBehaviour
     }
 
     // Update is called once per frame
+    bool HasTrigeredExtraFunctions = false;
     void FixedUpdate()
     {
         ExtraBehaivourFixedUpdate();
 
         if (rewind && !TimeExempt)
         {
+            if (HasTrigeredExtraFunctions)
+            {
+                ExtraTimeExemptStopBehavoiur();
+                HasTrigeredExtraFunctions = false;
+            }
             TimeRewind();
+        }
+        else if (rewind && TimeExempt && !HasTrigeredExtraFunctions)
+        {
+            ExtraTimeExemptStartBehavoiur();
+            HasTrigeredExtraFunctions = true;
         }
         else
         {
@@ -49,6 +60,9 @@ public abstract class TimeTrakedObject : MonoBehaviour
 
         //DebugCount();
     }
+
+    virtual public void ExtraTimeExemptStartBehavoiur() { }
+    virtual public void ExtraTimeExemptStopBehavoiur() { }
 
     /// <summary>
     /// Runs at the start of Fixed update to allow for special behavoiur

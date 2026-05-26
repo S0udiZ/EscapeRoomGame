@@ -395,11 +395,7 @@ public class Controller
                 joint.connectedBody = ClosestObject.transform.GetComponent<Rigidbody>();
                 handInteraction.IsHoldingObject = true;
 
-                TimeTrakedObject timeTrakedObject = ClosestObject.gameObject.GetComponent<TimeTrakedObject>();
-                if (timeTrakedObject)
-                {
-                    timeTrakedObject.TimeExempt = true;
-                }
+
             }
             else
             {
@@ -458,11 +454,7 @@ public class Controller
         //}
         if (grabbed_object)
         {
-            TimeTrakedObject timeTrakedObject = grabbed_object.gameObject.GetComponent<TimeTrakedObject>();
-            if (timeTrakedObject)
-            {
-                timeTrakedObject.TimeExempt = false;
-            }
+
             //Grip idle animation
             controller_animator.SetTrigger("Idle");
             joint.connectedBody = null;

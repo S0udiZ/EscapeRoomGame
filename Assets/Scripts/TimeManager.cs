@@ -91,6 +91,8 @@ public class TimeManager : MonoBehaviour
     }
     public void StopTimeReverse()
     {
+        StopAllCoroutines();
+        Time.timeScale = 1;
         RewindStop();
     }
 

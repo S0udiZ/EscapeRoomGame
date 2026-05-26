@@ -21,6 +21,7 @@ public class TimeTrakedRigidBody : TimeTrakedObject
     bool isSpring = false;
 
     Rigidbody rb;
+    GrabableObject grabableObject;
 
     public override void Init()
     {
@@ -34,6 +35,21 @@ public class TimeTrakedRigidBody : TimeTrakedObject
         trackedVelocity = new();
         trackedAngularVelocity = new();
         rb = GetComponent<Rigidbody>();
+        grabableObject = GetComponent<GrabableObject>();
+        if (grabableObject)
+        {
+            grabableObject.on_grab.AddListener(Grabbed);
+            grabableObject.on_drop.AddListener(Droped);
+        }
+    }
+
+    void Grabbed()
+    {
+        TimeExempt = true;
+    }
+    void Droped()
+    {
+        TimeExempt = false;
     }
     public override bool IsSameAsLastFrame(int index)
     {
@@ -71,6 +87,15 @@ public class TimeTrakedRigidBody : TimeTrakedObject
             spring.enabled = false;
         }
     }
+
+    public override void ExtraTimeExemptStopBehavoiur()
+    {
+        rb.isKinematic = true;
+        if (isSpring)
+        {
+            spring.enabled = false;
+        }
+    }
     public override void StopRewind()
     {
         base.StopRewind();
@@ -80,6 +105,16 @@ public class TimeTrakedRigidBody : TimeTrakedObject
             spring.enabled = true;
         }
     }
+    public override void ExtraTimeExemptStartBehavoiur()
+    {
+        rb.isKinematic = false;
+        if (isSpring)
+        {
+            spring.enabled = true;
+        }
+    }
+
+
 
     //Extra Behavoiour
     public override void ExtraBehaivourFixedUpdate()
