@@ -116,7 +116,7 @@ MonoBehaviour:
   cap: {fileID: 0}
   isOpen: 0
   inertness: 100
-  defaultLiquidColor: {r: 0, g: 1, b: 0.46625066, a: 1}
+  defaultLiquidColor: {r: 0.3254902, g: 0.67058825, b: 0.27058825, a: 1}
   fillAmountPercent: 0.751
   chemicalProcents:
   - Amount: 1
@@ -239,6 +239,8 @@ MonoBehaviour:
     offset: {x: 0, y: 0, z: 0, w: 0}
     interactables: []
     snapables: []
+    grabbing: 0
+    trigger: 0
   snapped_point: {fileID: 0}
   on_grab:
     m_PersistentCalls:

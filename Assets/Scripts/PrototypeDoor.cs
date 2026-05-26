@@ -14,6 +14,7 @@ public class PrototypeDoor : Interactable
     void Start()
     {
         initialPosition = transform.localPosition;
+        targetPosition += initialPosition; // Make targetPosition relative to initial position
     }
 
     void Update()
