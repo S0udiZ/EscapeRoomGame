@@ -394,6 +394,12 @@ public class Controller
                 joint = controller.AddComponent<FixedJoint>();
                 joint.connectedBody = ClosestObject.transform.GetComponent<Rigidbody>();
                 handInteraction.IsHoldingObject = true;
+
+                TimeTrakedObject timeTrakedObject = ClosestObject.gameObject.GetComponent<TimeTrakedObject>();
+                if (timeTrakedObject)
+                {
+                    timeTrakedObject.TimeExempt = true;
+                }
             }
             else
             {
@@ -452,6 +458,11 @@ public class Controller
         //}
         if (grabbed_object)
         {
+            TimeTrakedObject timeTrakedObject = grabbed_object.gameObject.GetComponent<TimeTrakedObject>();
+            if (timeTrakedObject)
+            {
+                timeTrakedObject.TimeExempt = false;
+            }
             //Grip idle animation
             controller_animator.SetTrigger("Idle");
             joint.connectedBody = null;
@@ -483,6 +494,7 @@ public class Controller
                 }
             }
             grabbed_object.Dropped(rb.linearVelocity * 2);
+
             grabbed_object.on_drop.Invoke();
             grabbed_object = null;
             rb.angularVelocity = Vector3.zero;
