@@ -295,7 +295,7 @@ namespace UnitySimpleLiquid
 					Lock hitLock = hit.collider.GetComponent<Lock>();
 					if (hitLock)
 					{
-						if (liquidContainer.ChemIndexs.ContainsKey("HCl"))
+						if (liquidContainer.ChemIndexs.ContainsKey("USSRA"))
 						{
 							hitLock.Activate();
 						}
