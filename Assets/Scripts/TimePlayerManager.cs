@@ -133,6 +133,9 @@ public class TimePlayerManager : MonoBehaviour
             }
 
         }
+        timeReversed = false;
+        timeManager.StopTimeReverse();
+        radationSphere.Reversed = false;
 
         RadationSphere.SetActive(false);
 
