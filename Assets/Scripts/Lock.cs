@@ -13,10 +13,16 @@ public class Lock : Interactable
     [SerializeField]
     bool Debug;
     bool running = false;
+
+    [SerializeField]
+    GameObject[] Doors;
+
+    Rigidbody rb;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         MeshRenderer = GetComponent<Renderer>();
+        rb = GetComponentInParent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -50,6 +56,12 @@ public class Lock : Interactable
 
             curTime += Time.deltaTime;
             yield return null;
+        }
+        rb.isKinematic = false;
+        foreach (var item in Doors)
+        {
+            Rigidbody rigidbody = item.GetComponent<Rigidbody>();
+            rigidbody.isKinematic = false;
         }
         Destroy(gameObject);
         Destroy(this);
